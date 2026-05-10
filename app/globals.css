@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand Colors */
+  --color-bordeaux:       #6E1F2F;
+  --color-bordeaux-dark:  #3A111A;
+  --color-or:             #C8A24A;
+  --color-or-light:       #D9B96A;
+  --color-beige:          #F5EBDD;
+  --color-ivoire:         #FFF9F0;
+  --color-brun:           #2F1E1A;
+  --color-brun-light:     #5C3D35;
+
+  /* Fonts — Cormorant Garamond pour les titres (remplace Playfair Display) */
+  --font-serif: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+* { box-sizing: border-box; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FFF9F0;
+  color: #2F1E1A;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Cormorant Garamond — taille perçue plus grande que Playfair, bénéficie de tailles légèrement supérieures */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: 0.01em;
+}
+
+/* Ajustement : Cormorant à poids 600 se lit bien, mais 700 peut paraître trop gras */
+h1 { font-weight: 600; line-height: 1.1; }
+h2 { font-weight: 600; line-height: 1.2; }
+h3 { font-weight: 500; }
+
+/* ── Gold shimmer line ── */
+.gold-line {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, #C8A24A, #D9B96A, #C8A24A);
+  flex-shrink: 0;
+}
+
+/* ── Subtle kente-inspired background pattern ── */
+.pattern-dot {
+  background-image: radial-gradient(circle, rgba(200, 162, 74, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.pattern-grid {
+  background-image:
+    linear-gradient(rgba(200, 162, 74, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 162, 74, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Gradient text ── */
+.text-gradient-or {
+  background: linear-gradient(135deg, #C8A24A 0%, #E8C96A 50%, #C8A24A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Card hover lift ── */
+.card-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(58, 17, 26, 0.12);
+}
+
+/* ── Fade-up animation ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up              { animation: fadeUp 0.6s ease both; }
+.animate-fade-up-1            { animation-delay: 0.1s; }
+.animate-fade-up-2            { animation-delay: 0.2s; }
+.animate-fade-up-3            { animation-delay: 0.3s; }
+.animate-fade-up-4            { animation-delay: 0.4s; }
+
+/* ── WhatsApp floating pulse ── */
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+}
+.wa-pulse { animation: waPulse 2.5s ease-in-out infinite; }
+
+/* ── Prose styles for blog ── */
+.prose h2      { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; color: #3A111A; letter-spacing: 0.01em; }
+.prose h3      { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #3A111A; }
+.prose p       { margin-bottom: 1.25rem; line-height: 1.8; }
+.prose ul      { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+.prose li      { margin-bottom: 0.5rem; }
+.prose strong  { font-weight: 600; color: #2F1E1A; }
+.prose em      { font-style: italic; }
