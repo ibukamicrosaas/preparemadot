@@ -10,23 +10,22 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  // metadataBase requis pour résoudre les URLs relatives des OG images
   metadataBase: new URL(siteConfig.url),
-  icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
-  },
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
     siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
+    // opengraph-image.png dans app/ est auto-détecté, mais on surcharge ici
+    // pour avoir les dimensions explicites dans les balises meta
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} — ${siteConfig.tagline}`,
+        alt: `${siteConfig.name} — Préparation de dot africaine`,
       },
     ],
   },
@@ -37,6 +36,7 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
   },
   robots: { index: true, follow: true },
+  // Les icônes sont gérées par app/icon.png (convention fichiers Next.js)
 };
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
